@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
@@ -16,66 +16,103 @@
 </head>
 <body>
 
+    <!-- Background Orbs for Premium Depth -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
     <main>
-        <!-- Hero Section -->
-        <section class="hero" style="background-image: url('images/hero.jpg');">
-            <div class="container hero-content">
-                <h1>Your Trusted Global Mobility & Logistics Partner</h1>
-                <p>We simplify international travel, immigration, logistics, document processing, recruitment, and business mobility with integrity, professionalism, and excellence.</p>
-                <div class="hero-btns">
-                    <a href="contact.html" class="btn btn-primary">Apply Now</a>
-                    <a href="contact.html" class="btn btn-accent">Request Consultation</a>
-                    <a href="contact.html" class="btn btn-outline-white">Contact Us</a>
+        <!-- Modern Split Hero Section -->
+        <section class="hero hero-split">
+            <div class="container hero-container">
+                <div class="hero-text reveal reveal-left">
+                    <span class="eyebrow">// SD TRAVELS & LOGISTICS</span>
+                    <h1>Global Mobility. <br><span class="text-gradient">Redefined.</span></h1>
+                    <p>We simplify international travel, immigration, logistics, and business mobility with unmatched professionalism and integrity.</p>
+                    <div class="hero-btns">
+                        <a href="contact.html" class="btn btn-primary btn-shimmer">Start Your Journey</a>
+                        <a href="services.html" class="btn btn-outline-white">Explore Services</a>
+                    </div>
+                </div>
+                <div class="hero-visual reveal reveal-right">
+                    <div class="hero-image-wrapper">
+                        <img src="images/hero.jpg" alt="Global Mobility">
+                        <div class="floating-badge badge-1">
+                            <i class="fa-solid fa-plane-departure"></i>
+                            <span>10k+ Flights Booked</span>
+                        </div>
+                        <div class="floating-badge badge-2">
+                            <i class="fa-solid fa-passport"></i>
+                            <span>98% Visa Success</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Quick Introduction -->
         <section class="section">
-            <div class="container text-center" style="max-width: 800px;">
-                <h2 class="section-title">Welcome to SD Travels & Logistics Ltd</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">At SD Travels & Logistics Ltd, we help individuals, families, students, professionals, and businesses navigate international opportunities with confidence.</p>
-                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Whether you're travelling for work, study, tourism, relocation, or business, our experienced team provides end-to-end support from consultation to successful completion.</p>
-                <p style="font-size: 1.3rem; font-weight: 600; color: var(--primary-color);">Our commitment is simple:<br><span style="color: var(--accent-color);">Integrity in Every Journey.</span></p>
+            <div class="container text-center reveal reveal-up" style="max-width: 800px;">
+                <span class="eyebrow" style="color: var(--primary-color);">// WHO WE ARE</span>
+                <h2 class="section-title">Navigating International Opportunities</h2>
+                <p style="font-size: 1.15rem; margin-bottom: 1.5rem; color: var(--text-light);">At SD Travels & Logistics Ltd, we help individuals, families, students, professionals, and businesses cross borders with absolute confidence.</p>
+                <p style="font-size: 1.15rem; margin-bottom: 2rem; color: var(--text-light);">Whether you're travelling for work, study, tourism, relocation, or business, our experienced team provides end-to-end support.</p>
+                <p style="font-size: 1.5rem; font-weight: 700; font-family: var(--font-heading); color: var(--primary-color);">Our commitment: <span style="color: var(--accent-color);">Integrity in Every Journey.</span></p>
             </div>
         </section>
 
-        <!-- Our Core Services -->
-        <section class="section bg-light">
+        <!-- Our Core Services (Bento Grid) -->
+        <section class="section bg-glass">
             <div class="container">
-                <h2 class="section-title">Our Core Services</h2>
-                <div class="grid-4">
-                    <a href="flight-booking.html" class="card text-center">
-                        <i class="fa-solid fa-plane-up service-icon"></i>
-                        <h3 style="font-size: 1.2rem;">Flight Reservations</h3>
+                <div class="section-header reveal reveal-up">
+                    <span class="eyebrow" style="color: var(--primary-color);">// EXPERTISE</span>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 1rem;">Our Core Services</h2>
+                </div>
+                
+                <div class="bento-grid">
+                    <!-- Large Highlight Card 1 -->
+                    <a href="flight-booking.html" class="card bento-large text-left reveal reveal-up" style="transition-delay: 0.1s;">
+                        <div class="card-content">
+                            <i class="fa-solid fa-plane-up service-icon"></i>
+                            <h3>Flight Reservations</h3>
+                            <p>Global flight ticketing with the best routes and competitive rates tailored for your comfort.</p>
+                            <span class="card-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
                     </a>
-                    <a href="visa-services.html" class="card text-center">
-                        <i class="fa-solid fa-passport service-icon"></i>
-                        <h3 style="font-size: 1.2rem;">Visa Assistance</h3>
+                    
+                    <!-- Large Highlight Card 2 -->
+                    <a href="visa-services.html" class="card bento-large text-left reveal reveal-up" style="transition-delay: 0.2s;">
+                        <div class="card-content">
+                            <i class="fa-solid fa-passport service-icon"></i>
+                            <h3>Visa Assistance</h3>
+                            <p>Expert guidance through complex visa applications ensuring a seamless approval process.</p>
+                            <span class="card-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                        </div>
                     </a>
-                    <a href="study-abroad.html" class="card text-center">
+                    
+                    <!-- Standard Cards -->
+                    <a href="study-abroad.html" class="card text-center reveal reveal-up" style="transition-delay: 0.3s;">
                         <i class="fa-solid fa-graduation-cap service-icon"></i>
-                        <h3 style="font-size: 1.2rem;">Study Abroad</h3>
+                        <h4>Study Abroad</h4>
                     </a>
-                    <a href="international-recruitment.html" class="card text-center">
+                    <a href="international-recruitment.html" class="card text-center reveal reveal-up" style="transition-delay: 0.4s;">
                         <i class="fa-solid fa-briefcase service-icon"></i>
-                        <h3 style="font-size: 1.2rem;">International Recruitment</h3>
+                        <h4>Recruitment</h4>
                     </a>
-                    <a href="logistics.html" class="card text-center">
+                    <a href="logistics.html" class="card text-center reveal reveal-up" style="transition-delay: 0.5s;">
                         <i class="fa-solid fa-box service-icon"></i>
-                        <h3 style="font-size: 1.2rem;">Logistics & Freight</h3>
+                        <h4>Logistics & Freight</h4>
                     </a>
-                    <a href="authentication-legalization.html" class="card text-center">
+                    <a href="authentication-legalization.html" class="card text-center reveal reveal-up" style="transition-delay: 0.6s;">
                         <i class="fa-solid fa-file-signature service-icon"></i>
-                        <h3 style="font-size: 1.2rem;">Authentication & Legalization</h3>
+                        <h4>Legalization</h4>
                     </a>
-                    <a href="corporate.html" class="card text-center">
+                    <a href="corporate.html" class="card text-center reveal reveal-up" style="transition-delay: 0.7s;">
                         <i class="fa-solid fa-building service-icon"></i>
-                        <h3 style="font-size: 1.2rem;">Business Consultancy</h3>
+                        <h4>Corporate</h4>
                     </a>
-                    <a href="immigration.html" class="card text-center">
+                    <a href="immigration.html" class="card text-center reveal reveal-up" style="transition-delay: 0.8s;">
                         <i class="fa-solid fa-earth-americas service-icon"></i>
-                        <h3 style="font-size: 1.2rem;">Immigration Services</h3>
+                        <h4>Immigration</h4>
                     </a>
                 </div>
             </div>
@@ -85,24 +122,23 @@
         <section class="section">
             <div class="container">
                 <div class="grid-2">
-                    <div>
-                        <h2 class="section-title" style="text-align: left;">Why Choose SD Travels?</h2>
-                        <p style="margin-bottom: 2rem;">We pride ourselves on delivering exceptional service, ensuring your travel and logistics needs are met with precision and care.</p>
-                        <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                            <li style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--accent-color);"></i> Professional & Experienced Team</li>
-                            <li style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--accent-color);"></i> Transparent Processes</li>
-                            <li style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--accent-color);"></i> Trusted Global Partners</li>
-                            <li style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--accent-color);"></i> Personalized Client Support</li>
-                            <li style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--accent-color);"></i> Fast Response Time</li>
-                            <li style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--accent-color);"></i> High Success Rate</li>
-                            <li style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--accent-color);"></i> Secure Documentation</li>
-                            <li style="display: flex; align-items: center; gap: 10px;"><i class="fa-solid fa-check-circle" style="color: var(--accent-color);"></i> Excellent Customer Service</li>
+                    <div class="reveal reveal-left">
+                        <span class="eyebrow" style="color: var(--primary-color);">// THE SD ADVANTAGE</span>
+                        <h2 class="section-title" style="text-align: left;">Why Choose Us?</h2>
+                        <p style="margin-bottom: 2rem; font-size: 1.1rem; color: var(--text-light);">We pride ourselves on delivering exceptional service, ensuring your travel and logistics needs are met with absolute precision and care.</p>
+                        <ul class="feature-list">
+                            <li><i class="fa-solid fa-check-circle"></i> Professional & Experienced Team</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Transparent Processes</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Trusted Global Partners</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Personalized Client Support</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Fast Response Time</li>
+                            <li><i class="fa-solid fa-check-circle"></i> High Success Rate</li>
                         </ul>
                     </div>
-                    <div>
-                        <!-- Placeholder for image -->
-                        <div style="width: 100%; height: 400px; background-color: var(--bg-light-gray); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
-                            <img src="images/about.jpg" alt="About SD Travels" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="reveal reveal-right">
+                        <div class="image-showcase">
+                            <img src="images/about.jpg" alt="About SD Travels">
+                            <div class="showcase-backdrop"></div>
                         </div>
                     </div>
                 </div>
@@ -110,80 +146,71 @@
         </section>
 
         <!-- Our Process -->
-        <section class="section bg-light">
+        <section class="section bg-glass">
             <div class="container">
-                <h2 class="section-title">Our Process</h2>
-                <div class="process-wrapper">
+                <div class="text-center reveal reveal-up">
+                    <span class="eyebrow" style="color: var(--primary-color);">// WORKFLOW</span>
+                    <h2 class="section-title">Our Process</h2>
+                </div>
+                <div class="process-wrapper reveal reveal-up" style="transition-delay: 0.2s;">
                     <div class="process-step">
                         <div class="step-number">1</div>
-                        <div class="step-title">Book Consultation</div>
+                        <div class="step-title">Consultation</div>
                     </div>
                     <div class="process-step">
                         <div class="step-number">2</div>
-                        <div class="step-title">Document Assessment</div>
+                        <div class="step-title">Assessment</div>
                     </div>
                     <div class="process-step">
                         <div class="step-number">3</div>
-                        <div class="step-title">Application Processing</div>
+                        <div class="step-title">Processing</div>
                     </div>
                     <div class="process-step">
                         <div class="step-number">4</div>
-                        <div class="step-title">Approval & Travel Preparation</div>
+                        <div class="step-title">Preparation</div>
                     </div>
                     <div class="process-step">
                         <div class="step-number">5</div>
-                        <div class="step-title">Successful Journey</div>
+                        <div class="step-title">Success</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Testimonials -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">What Our Clients Say</h2>
-                <div class="grid-3">
-                    <div class="card">
-                        <div style="color: var(--accent-color); margin-bottom: 1rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p style="font-style: italic; margin-bottom: 1.5rem;">"SD Travels made my study abroad application stress-free. Their guidance was invaluable, and I got my visa on the first try!"</p>
-                        <div style="font-weight: 600; color: var(--primary-color);">- Emmanuel O.</div>
-                    </div>
-                    <div class="card">
-                        <div style="color: var(--accent-color); margin-bottom: 1rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p style="font-style: italic; margin-bottom: 1.5rem;">"Highly professional team. They handled our corporate travel logistics flawlessly for our recent conference in Europe."</p>
-                        <div style="font-weight: 600; color: var(--primary-color);">- Sarah T.</div>
-                    </div>
-                    <div class="card">
-                        <div style="color: var(--accent-color); margin-bottom: 1rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p style="font-style: italic; margin-bottom: 1.5rem;">"Their transparency and dedication are unmatched. I successfully relocated to Canada through their immigration services."</p>
-                        <div style="font-weight: 600; color: var(--primary-color);">- David M.</div>
-                    </div>
-                </div>
+        <!-- Infinite Scrolling Marquee (Our Partners) -->
+        <section class="section" style="padding: 4rem 0;">
+            <div class="container text-center reveal reveal-up">
+                <span class="eyebrow" style="color: var(--primary-color);">// OUR NETWORK</span>
+                <h2 class="section-title" style="margin-bottom: 2rem;">Trusted Global Partners</h2>
             </div>
-        </section>
-
-        <!-- Partner Logos -->
-        <section class="section bg-light">
-            <div class="container text-center">
-                <h2 class="section-title">Our Partners</h2>
-                <p style="margin-bottom: 2rem;">We work with top airlines, universities, employers, embassies, and logistics companies globally.</p>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; opacity: 0.7;">
-                    <!-- Placeholder icons for partners -->
-                    <i class="fa-solid fa-building-columns fa-3x" title="Universities"></i>
-                    <i class="fa-solid fa-plane-arrival fa-3x" title="Airlines"></i>
-                    <i class="fa-solid fa-landmark-flag fa-3x" title="Embassies"></i>
-                    <i class="fa-solid fa-hotel fa-3x" title="Hotels"></i>
-                    <i class="fa-solid fa-truck-fast fa-3x" title="Logistics Companies"></i>
+            
+            <div class="marquee-container reveal reveal-up" style="transition-delay: 0.2s;">
+                <div class="marquee-content">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <i class="fa-solid fa-plane-arrival"></i>
+                    <i class="fa-solid fa-landmark-flag"></i>
+                    <i class="fa-solid fa-hotel"></i>
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <i class="fa-solid fa-earth-europe"></i>
+                    <i class="fa-solid fa-passport"></i>
+                    <!-- Duplicate for infinite loop -->
+                    <i class="fa-solid fa-building-columns"></i>
+                    <i class="fa-solid fa-plane-arrival"></i>
+                    <i class="fa-solid fa-landmark-flag"></i>
+                    <i class="fa-solid fa-hotel"></i>
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <i class="fa-solid fa-earth-europe"></i>
+                    <i class="fa-solid fa-passport"></i>
                 </div>
             </div>
         </section>
 
         <!-- CTA -->
-        <section class="section" style="background-color: var(--primary-color); color: var(--bg-white); text-align: center;">
-            <div class="container">
-                <h2 style="color: var(--bg-white); font-size: 2.5rem; margin-bottom: 1rem;">Ready to Begin Your Journey?</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #e0e0e0;">Book a Consultation Today and let us simplify your travel and logistics needs.</p>
-                <a href="contact.html" class="btn btn-accent" style="font-size: 1.1rem; padding: 1rem 3rem;">Book Consultation</a>
+        <section class="section cta-section reveal reveal-up">
+            <div class="container text-center">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;">Ready to Begin Your Journey?</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">Book a Consultation Today and let us simplify your travel and logistics needs.</p>
+                <a href="contact.html" class="btn btn-accent btn-large">Schedule Consultation <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
             </div>
         </section>
 

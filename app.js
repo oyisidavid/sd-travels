@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initHeader();
-    initFooter();
+    initBottomNav(); 
+    initFooter(); // Run before reveal animations so they are observed
+    initRevealAnimations(); 
+    initTiltEffect(); // 21st.dev effect
     initFAQ();
 });
 
@@ -9,7 +12,6 @@ function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    // Determine initial theme
     let currentTheme = 'light';
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         currentTheme = 'dark';
@@ -26,9 +28,8 @@ function toggleTheme() {
     htmlEl.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     
-    // Update icon
-    const icon = document.querySelector('#theme-toggle i');
-    if (icon) {
+    const icons = document.querySelectorAll('.theme-toggle i, .mobile-theme-toggle i');
+    icons.forEach(icon => {
         if (newTheme === 'dark') {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
@@ -36,7 +37,7 @@ function toggleTheme() {
             icon.classList.remove('fa-sun');
             icon.classList.add('fa-moon');
         }
-    }
+    });
 }
 
 function initHeader() {
@@ -63,9 +64,6 @@ function initHeader() {
                     <i class="fa-solid fa-moon"></i>
                 </button>
             </nav>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
-                <i class="fa-solid fa-bars"></i>
-            </button>
         </div>
     `;
 
@@ -73,7 +71,6 @@ function initHeader() {
     header.innerHTML = headerHTML;
     document.body.insertBefore(header, document.body.firstChild);
 
-    // Active link highlighting
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -82,25 +79,84 @@ function initHeader() {
         }
     });
 
-    // Theme Toggle Listener
     const themeBtn = document.getElementById('theme-toggle');
     if (themeBtn) {
-        // Set initial icon based on current theme
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const icon = themeBtn.querySelector('i');
         if (currentTheme === 'dark') {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
         }
-        
         themeBtn.addEventListener('click', toggleTheme);
     }
 
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('mobile-menu-btn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.style.boxShadow = 'var(--shadow-md)';
+            header.style.height = '80px';
+            const headerContainer = document.querySelector('.header-container');
+            if(headerContainer) headerContainer.style.height = '80px';
+        } else {
+            header.style.boxShadow = 'none';
+            header.style.height = '90px';
+            const headerContainer = document.querySelector('.header-container');
+            if(headerContainer) headerContainer.style.height = '90px';
+        }
+    });
+}
+
+function initBottomNav() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const isHome = currentPage === 'index.html' ? 'active' : '';
+    const isServices = currentPage.includes('services') || currentPage.includes('flight') || currentPage.includes('visa') ? 'active' : '';
+    const isContact = currentPage === 'contact.html' ? 'active' : '';
+
+    const bottomNavHTML = `
+        <div class="mobile-bottom-nav">
+            <div class="bottom-nav-list">
+                <a href="index.html" class="bottom-nav-item ${isHome}">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+                <a href="services.html" class="bottom-nav-item ${isServices}">
+                    <i class="fa-solid fa-plane"></i>
+                    <span>Services</span>
+                </a>
+                <a href="contact.html" class="bottom-nav-item ${isContact}">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Contact</span>
+                </a>
+                <button class="bottom-nav-item mobile-theme-toggle" title="Theme">
+                    <i class="fa-solid fa-moon"></i>
+                    <span>Theme</span>
+                </button>
+                <button class="bottom-nav-item" id="bottom-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                    <span>Menu</span>
+                </button>
+            </div>
+        </div>
+    `;
+
+    const div = document.createElement('div');
+    div.innerHTML = bottomNavHTML;
+    document.body.appendChild(div.firstElementChild);
+
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const themeBtnMobile = document.querySelector('.mobile-theme-toggle');
+    if (themeBtnMobile) {
+        const icon = themeBtnMobile.querySelector('i');
+        if (currentTheme === 'dark') {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+        themeBtnMobile.addEventListener('click', toggleTheme);
+    }
+
+    const menuBtn = document.getElementById('bottom-menu-btn');
     const navList = document.querySelector('#main-nav ul');
     
-    if(menuBtn) {
+    if(menuBtn && navList) {
         menuBtn.addEventListener('click', () => {
             navList.classList.toggle('show');
             const icon = menuBtn.querySelector('i');
@@ -113,27 +169,36 @@ function initHeader() {
             }
         });
     }
+}
 
-    // Scroll effect for header
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.boxShadow = 'var(--shadow-md)';
-            header.style.height = '70px';
-            const headerContainer = document.querySelector('.header-container');
-            if(headerContainer) headerContainer.style.height = '70px';
-        } else {
-            header.style.boxShadow = 'var(--shadow-sm)';
-            header.style.height = '80px';
-            const headerContainer = document.querySelector('.header-container');
-            if(headerContainer) headerContainer.style.height = '80px';
-        }
+function initRevealAnimations() {
+    const reveals = document.querySelectorAll('.reveal');
+    
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
+    };
+    
+    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, revealOptions);
+    
+    reveals.forEach(reveal => {
+        revealOnScroll.observe(reveal);
     });
 }
 
 function initFooter() {
     const footerHTML = `
         <div class="container">
-            <div class="footer-grid">
+            <div class="footer-grid reveal reveal-up">
                 <div class="footer-col">
                     <h4>SD Travels & Logistics Ltd</h4>
                     <p>Integrity in Every Journey.</p>
@@ -175,7 +240,7 @@ function initFooter() {
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="footer-bottom reveal reveal-up">
                 <p>&copy; ${new Date().getFullYear()} SD Travels & Logistics Ltd. All Rights Reserved.</p>
             </div>
         </div>
@@ -193,15 +258,44 @@ function initFAQ() {
         const header = item.querySelector('.accordion-header');
         if(header) {
             header.addEventListener('click', () => {
-                // Close all others
                 accordions.forEach(otherItem => {
                     if (otherItem !== item) {
                         otherItem.classList.remove('active');
                     }
                 });
-                // Toggle current
                 item.classList.toggle('active');
             });
         }
     });
+}
+
+function initTiltEffect() {
+    // 21st.dev style 3D tilt logic for Bento cards
+    const cards = document.querySelectorAll('.bento-grid .card');
+    
+    // Only apply on desktop where we have hover
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Calculate rotation based on cursor position (-5deg to 5deg)
+                const rotateX = ((y / rect.height) - 0.5) * -10;
+                const rotateY = ((x / rect.width) - 0.5) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                
+                // Dynamic Glare effect updating custom properties
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                // Reset on mouse leave
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+    }
 }
