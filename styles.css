@@ -977,27 +977,27 @@ footer {
     
     nav ul {
         display: none;
-        position: fixed;
-        bottom: 75px; 
+        position: absolute;
+        top: 100%; 
         left: 0;
         width: 100%;
         background-color: var(--bg-white);
         flex-direction: column;
         padding: 2rem;
-        box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         gap: 1.5rem;
-        border-top: 1px solid var(--border-color);
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        border-bottom: 1px solid var(--border-color);
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
         z-index: 1099;
     }
     
     nav ul.show {
         display: flex;
-        animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
-    @keyframes slideUp {
-        from { transform: translateY(100%); opacity: 0; }
+    @keyframes slideDown {
+        from { transform: translateY(-20px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
     
@@ -1018,23 +1018,15 @@ footer {
         padding: 5rem 0;
     }
 
-    /* Swipeable Horizontal Cards for Mobile */
+    /* Standard Vertical Cards for Mobile */
     .bento-grid {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
         padding: 1rem 0 2rem;
-        -webkit-overflow-scrolling: touch;
     }
     
-    .bento-grid::-webkit-scrollbar {
-        display: none;
-    }
-
     .bento-grid > * {
-        flex: 0 0 85%;
-        scroll-snap-align: center;
         margin-bottom: 0;
     }
     
