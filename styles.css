@@ -172,6 +172,10 @@ img {
     margin-right: auto;
 }
 
+.card.text-center {
+    align-items: center;
+}
+
 /* Buttons */
 .btn {
     display: inline-flex;
