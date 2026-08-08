@@ -1189,6 +1189,56 @@ footer {
     opacity: 1;
 }
 
+/* Vertical Testimonial Marquee */
+.vertical-marquee-wrapper {
+    position: relative;
+    height: 450px;
+    overflow: hidden;
+    width: 100%;
+    border-radius: var(--radius-lg);
+}
+
+.vertical-marquee-wrapper::before,
+.vertical-marquee-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.vertical-marquee-wrapper::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg-white) 10%, transparent);
+}
+
+.vertical-marquee-wrapper::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg-white) 10%, transparent);
+}
+
+[data-theme="dark"] .vertical-marquee-wrapper::before { background: linear-gradient(to bottom, var(--bg-white) 10%, transparent); }
+[data-theme="dark"] .vertical-marquee-wrapper::after { background: linear-gradient(to top, var(--bg-white) 10%, transparent); }
+
+.vertical-marquee-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: scroll-vertical 20s linear infinite;
+    padding-top: 1rem;
+}
+
+.vertical-marquee-wrapper:hover .vertical-marquee-content {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-vertical {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
 /* Infinite Marquee */
 .marquee-container {
     width: 100%;
