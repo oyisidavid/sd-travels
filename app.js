@@ -90,15 +90,24 @@ function initHeader() {
         themeBtn.addEventListener('click', toggleTheme);
     }
 
+    // Transparent Header Logic for Hero33
+    if (currentPage === 'index.html' || currentPage === '') {
+        header.classList.add('header-transparent');
+    }
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             header.style.boxShadow = 'var(--shadow-md)';
             header.style.height = '80px';
+            header.classList.remove('header-transparent');
             const headerContainer = document.querySelector('.header-container');
             if(headerContainer) headerContainer.style.height = '80px';
         } else {
             header.style.boxShadow = 'none';
             header.style.height = '90px';
+            if (currentPage === 'index.html' || currentPage === '') {
+                header.classList.add('header-transparent');
+            }
             const headerContainer = document.querySelector('.header-container');
             if(headerContainer) headerContainer.style.height = '90px';
         }
