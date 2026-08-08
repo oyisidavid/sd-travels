@@ -50,12 +50,16 @@
     --shadow-lg: 0 20px 40px rgba(0,0,0,0.5);
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     font-family: var(--font-body);
     color: var(--text-charcoal);
     background-color: var(--bg-white);
     line-height: 1.7;
-    overflow-x: hidden;
     transition: background-color var(--transition-medium), color var(--transition-medium);
 }
 
@@ -993,6 +997,8 @@ footer {
         border-bottom: 1px solid var(--border-color);
         border-radius: 0 0 var(--radius-lg) var(--radius-lg);
         z-index: 1099;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
     }
     
     nav ul.show {
