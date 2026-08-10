@@ -213,10 +213,10 @@ function initFooter() {
                     <p>Integrity in Every Journey.</p>
                     <p>We simplify international travel, immigration, logistics, document processing, recruitment, and business mobility.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://facebook.com/sdtravelsandlogistics" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/sdtravelsandlogistics" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://linkedin.com/company/sdtravelsandlogistics" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://x.com/sdtravelsandlogistics" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
