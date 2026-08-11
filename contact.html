@@ -87,29 +87,29 @@
                     <!-- Contact Form -->
                     <div style="background-color: var(--bg-white); padding: 3rem; border-radius: 8px; box-shadow: var(--shadow-lg);">
                         <h3 style="margin-bottom: 1.5rem; color: var(--primary-color);">Send Us A Message</h3>
-                        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Message sent successfully! Our team will contact you shortly.');">
+                        <form action="https://formsubmit.co/info@sdtravelsandlogistics.com" method="POST">
                             <div class="form-group">
                                 <label>Full Name</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" name="name" class="form-control" required>
                             </div>
                             <div class="grid-2" style="gap: 1rem;">
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input type="email" class="form-control" required>
+                                    <input type="email" name="email" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input type="tel" class="form-control" required>
+                                    <input type="tel" name="phone" class="form-control" required>
                                 </div>
                             </div>
                             <div class="grid-2" style="gap: 1rem;">
                                 <div class="form-group">
                                     <label>Country</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" name="country" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Service Required</label>
-                                    <select class="form-control" required>
+                                    <select name="service" class="form-control" required>
                                         <option value="">Select...</option>
                                         <option>Flight Booking</option>
                                         <option>Visa Services</option>
@@ -124,8 +124,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Message</label>
-                                <textarea class="form-control" required placeholder="How can we help you?"></textarea>
+                                <textarea name="message" class="form-control" required placeholder="How can we help you?"></textarea>
                             </div>
+                            <input type="hidden" name="_subject" value="New Submission on SD Travels & Logistics!">
                             <button type="submit" class="btn btn-accent" style="width: 100%;">Submit Inquiry</button>
                         </form>
                     </div>
