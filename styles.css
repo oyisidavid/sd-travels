@@ -247,6 +247,39 @@ img {
     transform: translateY(-3px);
 }
 
+/* Page Headers (Beautiful Gradients) */
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1a5c9e 50%, var(--accent-color) 100%);
+    padding: 6rem 0 3rem; /* Extra padding top to account for fixed nav */
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>') center center / cover;
+    pointer-events: none;
+}
+
+.page-header h1 {
+    font-size: 3.5rem;
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.page-header .breadcrumb {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    z-index: 1;
+}
+
 /* Header */
 header {
     background-color: rgba(255, 255, 255, 0.7);
@@ -695,25 +728,7 @@ footer {
     100% { transform: translateY(0px); }
 }
 
-/* Page Header (Inner pages) */
-.page-header {
-    background-color: var(--bg-light-gray);
-    padding: 8rem 0 4rem;
-    text-align: center;
-    position: relative;
-    border-bottom: 1px solid var(--border-color);
-}
 
-.page-header h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-}
-
-.breadcrumb {
-    color: var(--text-light);
-    font-size: 1rem;
-    font-weight: 500;
-}
 
 /* Process Section */
 .process-wrapper {
