@@ -259,6 +259,7 @@ function attachDeleteListeners() {
                 await deleteDoc(doc(db, col, id));
                 if(col === 'news') loadArticles();
                 if(col === 'events') loadEvents();
+                if(col === 'testimonials') loadTestimonials();
             }
         });
     });
@@ -289,6 +290,89 @@ tabs.forEach(tab => {
         } else if (targetId === 'events-tab') {
             dashboardTitle.textContent = 'Manage Events & Gallery';
             loadEvents();
+        } else if (targetId === 'testimonials-tab') {
+            dashboardTitle.textContent = 'Manage Client Testimonials';
+            loadTestimonials();
         }
     });
 });
+
+// Testimonials Logic Elements
+const testForm = document.getElementById('testimonial-form');
+const publishTestBtn = document.getElementById('publish-test-btn');
+const publishTestSuccess = document.getElementById('publish-test-success');
+const testimonialsList = document.getElementById('testimonials-list');
+
+// Publish Testimonial Logic
+testForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('test-name').value;
+    const location = document.getElementById('test-location').value;
+    const content = document.getElementById('test-content').value;
+    
+    const btnText = publishTestBtn.querySelector('.btn-text');
+    const loader = publishTestBtn.querySelector('.loader');
+    
+    btnText.style.display = 'none';
+    loader.style.display = 'inline-block';
+    
+    try {
+        await addDoc(collection(db, "testimonials"), {
+            name: name,
+            location: location,
+            content: content,
+            createdAt: new Date().toISOString()
+        });
+        
+        testForm.reset();
+        
+        publishTestSuccess.style.display = 'block';
+        setTimeout(() => publishTestSuccess.style.display = 'none', 3000);
+        
+        loadTestimonials();
+        
+    } catch (error) {
+        console.error("Error adding testimonial: ", error);
+        alert("Error publishing testimonial: " + error.message);
+    } finally {
+        btnText.style.display = 'inline-block';
+        loader.style.display = 'none';
+    }
+});
+
+// Load Testimonials Logic
+async function loadTestimonials() {
+    try {
+        const q = query(collection(db, "testimonials"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        if(querySnapshot.empty) {
+            testimonialsList.innerHTML = '<p style="color:#666;">No testimonials found.</p>';
+            return;
+        }
+        
+        let html = '<table style="width:100%; border-collapse: collapse; text-align: left;">';
+        html += '<tr style="border-bottom: 2px solid #eee;"> <th style="padding: 10px;">Date</th> <th style="padding: 10px;">Name</th> <th style="padding: 10px;">Location</th> <th style="padding: 10px;">Action</th> </tr>';
+        
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const date = new Date(data.createdAt).toLocaleDateString();
+            
+            html += `<tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">${date}</td>
+                <td style="padding: 10px; font-weight: 500;">${data.name}</td>
+                <td style="padding: 10px;">${data.location}</td>
+                <td style="padding: 10px;">
+                    <button class="delete-btn" data-id="${docSnap.id}" data-col="testimonials" style="background: none; border: none; color: var(--danger-color); cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>`;
+        });
+        
+        html += '</table>';
+        testimonialsList.innerHTML = html;
+        attachDeleteListeners();
+    } catch (error) {
+        console.error("Error loading testimonials: ", error);
+        testimonialsList.innerHTML = '<p style="color:red;">Error loading testimonials.</p>';
+    }
+}
