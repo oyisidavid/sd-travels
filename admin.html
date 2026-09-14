@@ -197,7 +197,10 @@
     <!-- Auth Container -->
     <div id="auth-container">
         <div class="login-box">
-            <h2><i class="fa-solid fa-lock" style="color: var(--accent-color);"></i> Admin Login</h2>
+            <h2 style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 2rem; margin-bottom: 2rem; font-family: 'Outfit', sans-serif;">
+                <i class="fa-solid fa-plane-departure" style="color: var(--accent-color);"></i>
+                <span style="color: var(--primary-color);">SD <span style="color: var(--accent-color);">Travels</span></span>
+            </h2>
             <form id="login-form">
                 <div class="form-group">
                     <label>Email</label>
@@ -223,59 +226,97 @@
                 <i class="fa-solid fa-plane-departure"></i> SD Admin
             </div>
             <ul class="nav-menu">
-                <li class="active"><i class="fa-solid fa-newspaper"></i> Manage News</li>
-                <!-- Future features -->
-                <!-- <li><i class="fa-solid fa-envelope"></i> Inquiries</li> -->
+                <li class="active" data-tab="news-tab"><i class="fa-solid fa-newspaper"></i> Manage News</li>
+                <li data-tab="events-tab"><i class="fa-solid fa-image"></i> Manage Events</li>
             </ul>
         </aside>
         
         <main class="main-content">
             <header class="header">
-                <h1>Manage News & Articles</h1>
+                <h1 id="dashboard-title">Manage News & Articles</h1>
                 <button class="logout-btn" id="logout-btn">Logout</button>
             </header>
             
-            <div class="card">
-                <h3 style="margin-top:0;">Publish New Article</h3>
-                <form id="news-form">
-                    <div class="form-group">
-                        <label>Article Title</label>
-                        <input type="text" id="news-title" required placeholder="e.g. New Visa Requirements for 2026">
-                    </div>
-                    
-                    <div class="d-flex">
-                        <div class="form-group" style="flex:1;">
-                            <label>Category</label>
-                            <select id="news-category" class="form-control" style="width:100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
-                                <option>Company News</option>
-                                <option>Visa Updates</option>
-                                <option>Travel Tips</option>
-                                <option>Study Abroad</option>
-                            </select>
+            <!-- NEWS TAB -->
+            <div id="news-tab" class="tab-content">
+                <div class="card">
+                    <h3 style="margin-top:0;">Publish New Article</h3>
+                    <form id="news-form">
+                        <div class="form-group">
+                            <label>Article Title</label>
+                            <input type="text" id="news-title" required placeholder="e.g. New Visa Requirements for 2026">
                         </div>
-                        <div class="form-group" style="flex:1;">
-                            <label>Featured Image (Optional)</label>
-                            <input type="file" id="news-image" accept="image/png, image/jpeg, image/webp">
+                        
+                        <div class="d-flex">
+                            <div class="form-group" style="flex:1;">
+                                <label>Category</label>
+                                <select id="news-category" class="form-control" style="width:100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+                                    <option>Company News</option>
+                                    <option>Visa Updates</option>
+                                    <option>Travel Tips</option>
+                                    <option>Study Abroad</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex:1;">
+                                <label>Featured Image (Optional)</label>
+                                <input type="file" id="news-image" accept="image/png, image/jpeg, image/webp">
+                            </div>
                         </div>
+                        
+                        <div class="form-group">
+                            <label>Content</label>
+                            <div id="editor-container"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn" id="publish-btn" style="width: auto;">
+                            <span class="btn-text">Publish Article</span>
+                            <div class="loader" style="display: none;"></div>
+                        </button>
+                        <div style="color: green; margin-top: 1rem; display: none;" id="publish-success">Article published successfully!</div>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <h3 style="margin-top:0;">Recent Articles</h3>
+                    <div id="articles-list">
+                        <p style="color:#666;">Loading articles...</p>
                     </div>
-                    
-                    <div class="form-group">
-                        <label>Content</label>
-                        <div id="editor-container"></div>
-                    </div>
-                    
-                    <button type="submit" class="btn" id="publish-btn" style="width: auto;">
-                        <span class="btn-text">Publish Article</span>
-                        <div class="loader" style="display: none;"></div>
-                    </button>
-                    <div style="color: green; margin-top: 1rem; display: none;" id="publish-success">Article published successfully!</div>
-                </form>
+                </div>
             </div>
-            
-            <div class="card">
-                <h3 style="margin-top:0;">Recent Articles</h3>
-                <div id="articles-list">
-                    <p style="color:#666;">Loading articles...</p>
+
+            <!-- EVENTS TAB -->
+            <div id="events-tab" class="tab-content hidden">
+                <div class="card">
+                    <h3 style="margin-top:0;">Post New Travel Event / Picture</h3>
+                    <form id="event-form">
+                        <div class="form-group">
+                            <label>Event Title / Location</label>
+                            <input type="text" id="event-title" required placeholder="e.g. Summer Vacation in Paris">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Picture (Required)</label>
+                            <input type="file" id="event-image" accept="image/png, image/jpeg, image/webp" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Short Write-up</label>
+                            <textarea id="event-description" required placeholder="Describe this event or picture..." style="width:100%; height:120px; padding:0.75rem; border:1px solid #ddd; border-radius:6px; font-family:inherit;"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn" id="publish-event-btn" style="width: auto;">
+                            <span class="btn-text">Publish Event</span>
+                            <div class="loader" style="display: none;"></div>
+                        </button>
+                        <div style="color: green; margin-top: 1rem; display: none;" id="publish-event-success">Event published successfully!</div>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <h3 style="margin-top:0;">Recent Events</h3>
+                    <div id="events-list">
+                        <p style="color:#666;">Loading events...</p>
+                    </div>
                 </div>
             </div>
         </main>

@@ -56,6 +56,7 @@ function initHeader() {
                     <li><a href="services.html" class="nav-link">Services</a></li>
                     <li><a href="corporate.html" class="nav-link">Corporate</a></li>
                     <li><a href="news.html" class="nav-link">News</a></li>
+                    <li><a href="events.html" class="nav-link">Events</a></li>
                     <li><a href="faq.html" class="nav-link">FAQs</a></li>
                     <li><a href="partner.html" class="nav-link">Partner</a></li>
                     <li><a href="contact.html" class="nav-link nav-cta">Contact Us</a></li>
@@ -227,6 +228,7 @@ function initFooter() {
                         <li><a href="corporate.html">Corporate Services</a></li>
                         <li><a href="partner.html">Partner With Us</a></li>
                         <li><a href="news.html">News & Updates</a></li>
+                        <li><a href="events.html">Events & Gallery</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

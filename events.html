@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Events & Gallery | SD Travels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <div class="page-header">
+            <div class="container">
+                <h1>Events & Gallery</h1>
+                <div class="breadcrumb">Home / Events</div>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div id="events-feed" class="grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <p id="events-loading" style="grid-column: 1 / -1; text-align: center; color: var(--text-light); font-size: 1.2rem; padding: 2rem;">Loading latest events...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+    <script type="module" src="js/events.js"></script>
+</body>
+</html>
