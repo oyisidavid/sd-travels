@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 
                 <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
                     <!-- Main Content Left -->
-                    <div style="flex: 2; min-width: 300px;">
+                    <div style="flex: 2; min-width: 250px;">
                         <div class="sch-section">
                             <h3>Eligibility</h3>
                             <p>${data.eligibility.replace(/\n/g, '<br>')}</p>
