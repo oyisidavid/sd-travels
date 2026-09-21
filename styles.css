@@ -50,12 +50,9 @@
     --shadow-lg: 0 20px 40px rgba(0,0,0,0.5);
 }
 
-html, body {
-    overflow-x: hidden;
-    position: relative;
-}
-
 body {
+    overflow-x: clip;
+    position: relative;
     font-family: var(--font-body);
     color: var(--text-charcoal);
     background-color: var(--bg-white);
@@ -1723,8 +1720,8 @@ header.header-transparent .logo i {
    ========================================= */
 @media (max-width: 991px) {
     /* Prevent horizontal scroll */
-    html, body {
-        overflow-x: hidden;
+    body {
+        overflow-x: clip;
     }
     
     h1, h2, h3, h4 {
