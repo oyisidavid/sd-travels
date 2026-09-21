@@ -229,6 +229,8 @@
                 <li class="active" data-tab="news-tab"><i class="fa-solid fa-newspaper"></i> Manage News</li>
                 <li data-tab="events-tab"><i class="fa-solid fa-image"></i> Manage Events</li>
                 <li data-tab="testimonials-tab"><i class="fa-solid fa-comments"></i> Manage Testimonials</li>
+                <li data-tab="scholarships-tab"><i class="fa-solid fa-graduation-cap"></i> Manage Scholarships</li>
+                <li data-tab="partners-tab"><i class="fa-solid fa-handshake"></i> Manage Partners</li>
             </ul>
         </aside>
         
@@ -252,10 +254,16 @@
                             <div class="form-group" style="flex:1;">
                                 <label>Category</label>
                                 <select id="news-category" class="form-control" style="width:100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
-                                    <option>Company News</option>
+                                    <option>Travel News</option>
                                     <option>Visa Updates</option>
-                                    <option>Travel Tips</option>
-                                    <option>Study Abroad</option>
+                                    <option>Immigration Changes</option>
+                                    <option>Scholarship Opportunities</option>
+                                    <option>Study Abroad Tips</option>
+                                    <option>Recruitment News</option>
+                                    <option>Tourism</option>
+                                    <option>Travel Advisories</option>
+                                    <option>Company News</option>
+                                    <option>Industry Insights</option>
                                 </select>
                             </div>
                             <div class="form-group" style="flex:1;">
@@ -354,6 +362,115 @@
                     <h3 style="margin-top:0;">Recent Testimonials</h3>
                     <div id="testimonials-list">
                         <p style="color:#666;">Loading testimonials...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCHOLARSHIPS TAB -->
+            <div id="scholarships-tab" class="tab-content hidden">
+                <div class="card">
+                    <h3 style="margin-top:0;">Post New Scholarship Alert</h3>
+                    <form id="scholarship-form">
+                        <div class="form-group">
+                            <label>Scholarship Title</label>
+                            <input type="text" id="sch-title" required placeholder="e.g. 2027 Chevening Scholarship">
+                        </div>
+                        
+                        <div class="d-flex">
+                            <div class="form-group" style="flex:1;">
+                                <label>Category</label>
+                                <select id="sch-category" class="form-control" style="width:100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+                                    <option>Undergraduate</option>
+                                    <option>Masters</option>
+                                    <option>PhD</option>
+                                    <option>Fellowship</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex:1;">
+                                <label>Deadline</label>
+                                <input type="text" id="sch-deadline" required placeholder="e.g. 15th October 2026">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Featured Image (Required)</label>
+                            <input type="file" id="sch-image" accept="image/png, image/jpeg, image/webp" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Eligibility</label>
+                            <textarea id="sch-eligibility" required placeholder="Who can apply?..." style="width:100%; height:80px; padding:0.75rem; border:1px solid #ddd; border-radius:6px; font-family:inherit;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Requirements</label>
+                            <textarea id="sch-requirements" required placeholder="List of documents needed..." style="width:100%; height:80px; padding:0.75rem; border:1px solid #ddd; border-radius:6px; font-family:inherit;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>How to Apply</label>
+                            <textarea id="sch-how" required placeholder="Steps to apply..." style="width:100%; height:80px; padding:0.75rem; border:1px solid #ddd; border-radius:6px; font-family:inherit;"></textarea>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="form-group" style="flex:1;">
+                                <label>Official Link (Optional)</label>
+                                <input type="url" id="sch-link" placeholder="https://...">
+                            </div>
+                            <div class="form-group" style="flex:1;">
+                                <label>WhatsApp Enquiry Number</label>
+                                <input type="text" id="sch-whatsapp" required placeholder="e.g. +2349068565467">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Full Article (Optional)</label>
+                            <div id="sch-editor-container" style="height: 200px;"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn" id="publish-sch-btn" style="width: auto;">
+                            <span class="btn-text">Publish Scholarship</span>
+                            <div class="loader" style="display: none;"></div>
+                        </button>
+                        <div style="color: green; margin-top: 1rem; display: none;" id="publish-sch-success">Scholarship published successfully!</div>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <h3 style="margin-top:0;">Recent Scholarships</h3>
+                    <div id="scholarships-list">
+                        <p style="color:#666;">Loading scholarships...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARTNERS TAB -->
+            <div id="partners-tab" class="tab-content hidden">
+                <div class="card">
+                    <h3 style="margin-top:0;">Add New Partner Logo</h3>
+                    <form id="partner-form">
+                        <div class="form-group">
+                            <label>Partner Name (For reference)</label>
+                            <input type="text" id="partner-name" required placeholder="e.g. Turkish Airlines">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Logo (Required)</label>
+                            <input type="file" id="partner-image" accept="image/png, image/jpeg, image/webp" required>
+                        </div>
+                        
+                        <button type="submit" class="btn" id="publish-partner-btn" style="width: auto;">
+                            <span class="btn-text">Add Partner</span>
+                            <div class="loader" style="display: none;"></div>
+                        </button>
+                        <div style="color: green; margin-top: 1rem; display: none;" id="publish-partner-success">Partner added successfully!</div>
+                    </form>
+                </div>
+                
+                <div class="card">
+                    <h3 style="margin-top:0;">Manage Partners</h3>
+                    <div id="partners-list">
+                        <p style="color:#666;">Loading partners...</p>
                     </div>
                 </div>
             </div>

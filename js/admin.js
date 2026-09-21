@@ -258,12 +258,35 @@ function attachDeleteListeners() {
                 const col = e.currentTarget.getAttribute('data-col');
                 await deleteDoc(doc(db, col, id));
                 if(col === 'news') loadArticles();
-                if(col === 'events') loadEvents();
-                if(col === 'testimonials') loadTestimonials();
-            }
-        });
-    });
-}
+// Initialize Quill Editors
+const quill = new Quill('#editor-container', {
+    theme: 'snow',
+    placeholder: 'Write the news article content here...',
+    modules: {
+        toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [{ 'header': 1 }, { 'header': 2 }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+            [{ 'indent': '-1'}, { 'indent': '+1' }],
+            [{ 'direction': 'rtl' }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'font': [] }],
+            [{ 'align': [] }],
+            ['clean'],
+            ['link', 'image']
+        ]
+    }
+});
+
+const schQuill = new Quill('#sch-editor-container', {
+    theme: 'snow',
+    placeholder: 'Optional: Write full article details here...',
+    modules: { toolbar: [['bold', 'italic', 'underline'], [{'list':'ordered'}, {'list':'bullet'}], ['link']] }
+});
 
 // Tab Switching Logic
 const tabs = document.querySelectorAll('.nav-menu li');
@@ -272,18 +295,14 @@ const dashboardTitle = document.getElementById('dashboard-title');
 
 tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-        // Remove active from all tabs
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         
-        // Hide all contents
         tabContents.forEach(c => c.classList.add('hidden'));
         
-        // Show target
         const targetId = tab.getAttribute('data-tab');
         document.getElementById(targetId).classList.remove('hidden');
         
-        // Update Title and load data
         if(targetId === 'news-tab') {
             dashboardTitle.textContent = 'Manage News & Articles';
             loadArticles();
@@ -293,9 +312,211 @@ tabs.forEach(tab => {
         } else if (targetId === 'testimonials-tab') {
             dashboardTitle.textContent = 'Manage Client Testimonials';
             loadTestimonials();
+        } else if (targetId === 'scholarships-tab') {
+            dashboardTitle.textContent = 'Manage Scholarships';
+            loadScholarships();
+        } else if (targetId === 'partners-tab') {
+            dashboardTitle.textContent = 'Manage Partners';
+            loadPartners();
         }
     });
 });
+
+// Helper for image upload
+async function uploadImage(file, pathPrefix) {
+    const fileName = `${pathPrefix}_${Date.now()}_${file.name}`;
+    const storageRef = ref(storage, fileName);
+    await uploadBytes(storageRef, file);
+    return await getDownloadURL(storageRef);
+}
+
+// Attach Delete Listeners generic
+function attachDeleteListeners() {
+    const deleteBtns = document.querySelectorAll('.delete-btn');
+    deleteBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            if(confirm('Are you sure you want to delete this item?')) {
+                const id = e.currentTarget.getAttribute('data-id');
+                const col = e.currentTarget.getAttribute('data-col');
+                await deleteDoc(doc(db, col, id));
+                if(col === 'news') loadArticles();
+                if(col === 'events') loadEvents();
+                if(col === 'testimonials') loadTestimonials();
+                if(col === 'scholarships') loadScholarships();
+                if(col === 'partners') loadPartners();
+            }
+        });
+    });
+}
+
+// -----------------------------------------
+// SCHOLARSHIPS LOGIC
+// -----------------------------------------
+const schForm = document.getElementById('scholarship-form');
+const publishSchBtn = document.getElementById('publish-sch-btn');
+const publishSchSuccess = document.getElementById('publish-sch-success');
+const scholarshipsList = document.getElementById('scholarships-list');
+
+schForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btnText = publishSchBtn.querySelector('.btn-text');
+    const loader = publishSchBtn.querySelector('.loader');
+    
+    btnText.style.display = 'none';
+    loader.style.display = 'inline-block';
+    
+    try {
+        const fileInput = document.getElementById('sch-image');
+        let imageUrl = '';
+        if(fileInput.files.length > 0) {
+            imageUrl = await uploadImage(fileInput.files[0], 'scholarships');
+        }
+
+        const fullArticle = schQuill.root.innerHTML === '<p><br></p>' ? '' : schQuill.root.innerHTML;
+
+        await addDoc(collection(db, "scholarships"), {
+            title: document.getElementById('sch-title').value,
+            category: document.getElementById('sch-category').value,
+            deadline: document.getElementById('sch-deadline').value,
+            eligibility: document.getElementById('sch-eligibility').value,
+            requirements: document.getElementById('sch-requirements').value,
+            howToApply: document.getElementById('sch-how').value,
+            link: document.getElementById('sch-link').value,
+            whatsapp: document.getElementById('sch-whatsapp').value,
+            content: fullArticle,
+            imageUrl: imageUrl,
+            createdAt: new Date().toISOString()
+        });
+        
+        schForm.reset();
+        schQuill.setContents([]);
+        
+        publishSchSuccess.style.display = 'block';
+        setTimeout(() => publishSchSuccess.style.display = 'none', 3000);
+        
+        loadScholarships();
+        
+    } catch (error) {
+        console.error(error);
+        alert("Error publishing scholarship: " + error.message);
+    } finally {
+        btnText.style.display = 'inline-block';
+        loader.style.display = 'none';
+    }
+});
+
+async function loadScholarships() {
+    try {
+        const q = query(collection(db, "scholarships"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        if(querySnapshot.empty) {
+            scholarshipsList.innerHTML = '<p style="color:#666;">No scholarships found.</p>';
+            return;
+        }
+        
+        let html = '<table style="width:100%; border-collapse: collapse; text-align: left;">';
+        html += '<tr style="border-bottom: 2px solid #eee;"> <th style="padding: 10px;">Date</th> <th style="padding: 10px;">Title</th> <th style="padding: 10px;">Category</th> <th style="padding: 10px;">Action</th> </tr>';
+        
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const date = new Date(data.createdAt).toLocaleDateString();
+            
+            html += `<tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;">${date}</td>
+                <td style="padding: 10px; font-weight: 500;">${data.title}</td>
+                <td style="padding: 10px;">${data.category}</td>
+                <td style="padding: 10px;">
+                    <button class="delete-btn" data-id="${docSnap.id}" data-col="scholarships" style="background: none; border: none; color: var(--danger-color); cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>`;
+        });
+        
+        html += '</table>';
+        scholarshipsList.innerHTML = html;
+        attachDeleteListeners();
+    } catch (error) {
+        console.error(error);
+        scholarshipsList.innerHTML = '<p style="color:red;">Error loading scholarships.</p>';
+    }
+}
+
+// -----------------------------------------
+// PARTNERS LOGIC
+// -----------------------------------------
+const partnerForm = document.getElementById('partner-form');
+const publishPartnerBtn = document.getElementById('publish-partner-btn');
+const publishPartnerSuccess = document.getElementById('publish-partner-success');
+const partnersList = document.getElementById('partners-list');
+
+partnerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btnText = publishPartnerBtn.querySelector('.btn-text');
+    const loader = publishPartnerBtn.querySelector('.loader');
+    
+    btnText.style.display = 'none';
+    loader.style.display = 'inline-block';
+    
+    try {
+        const fileInput = document.getElementById('partner-image');
+        let imageUrl = '';
+        if(fileInput.files.length > 0) {
+            imageUrl = await uploadImage(fileInput.files[0], 'partners');
+        }
+
+        await addDoc(collection(db, "partners"), {
+            name: document.getElementById('partner-name').value,
+            imageUrl: imageUrl,
+            createdAt: new Date().toISOString()
+        });
+        
+        partnerForm.reset();
+        
+        publishPartnerSuccess.style.display = 'block';
+        setTimeout(() => publishPartnerSuccess.style.display = 'none', 3000);
+        
+        loadPartners();
+        
+    } catch (error) {
+        console.error(error);
+        alert("Error adding partner: " + error.message);
+    } finally {
+        btnText.style.display = 'inline-block';
+        loader.style.display = 'none';
+    }
+});
+
+async function loadPartners() {
+    try {
+        const q = query(collection(db, "partners"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        if(querySnapshot.empty) {
+            partnersList.innerHTML = '<p style="color:#666;">No partners found.</p>';
+            return;
+        }
+        
+        let html = '<div style="display: flex; flex-wrap: wrap; gap: 1rem;">';
+        
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            html += `
+                <div style="border: 1px solid #eee; padding: 10px; border-radius: 8px; text-align: center; width: 120px;">
+                    <img src="${data.imageUrl}" alt="${data.name}" style="max-width: 100%; height: 60px; object-fit: contain; margin-bottom: 5px;">
+                    <div style="font-size: 0.8rem; margin-bottom: 5px;">${data.name}</div>
+                    <button class="delete-btn" data-id="${docSnap.id}" data-col="partners" style="background: none; border: none; color: var(--danger-color); cursor: pointer;"><i class="fa-solid fa-trash"></i> Delete</button>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        partnersList.innerHTML = html;
+        attachDeleteListeners();
+    } catch (error) {
+        console.error(error);
+        partnersList.innerHTML = '<p style="color:red;">Error loading partners.</p>';
+    }
+}
 
 // Testimonials Logic Elements
 const testForm = document.getElementById('testimonial-form');

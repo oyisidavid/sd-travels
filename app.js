@@ -55,6 +55,7 @@ function initHeader() {
                     <li><a href="about.html" class="nav-link">About Us</a></li>
                     <li><a href="services.html" class="nav-link">Services</a></li>
                     <li><a href="corporate.html" class="nav-link">Corporate</a></li>
+                    <li><a href="scholarships.html" class="nav-link">Scholarships</a></li>
                     <li><a href="news.html" class="nav-link">News</a></li>
                     <li><a href="events.html" class="nav-link">Events</a></li>
                     <li><a href="faq.html" class="nav-link">FAQs</a></li>
@@ -205,20 +206,21 @@ function initFooter() {
                     <p>Integrity in Every Journey.</p>
                     <p>We simplify international travel, immigration, logistics, document processing, recruitment, and business mobility.</p>
                     <div class="social-links">
-                        <a href="https://facebook.com/sdtravelsandlogistics" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="https://instagram.com/sdtravelsandlogistics" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://facebook.com/SDTRAVELSANDLOGISTICS" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://instagram.com/sdtravelslogisticsltd" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://linkedin.com/company/sdtravelsandlogistics" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="https://x.com/sdtravelsandlogistics" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://x.com/sdtravels001" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
                         <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Our Services</a></li>
-                        <li><a href="corporate.html">Corporate Services</a></li>
-                        <li><a href="partner.html">Partner With Us</a></li>
-                        <li><a href="news.html">News & Updates</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="scholarships.html">Scholarships</a></li>
+                        <li><a href="events.html">Gallery & Events</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                         <li><a href="events.html">Events & Gallery</a></li>
                     </ul>
                 </div>
