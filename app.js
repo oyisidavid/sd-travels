@@ -53,13 +53,22 @@ function initHeader() {
                 <ul>
                     <li><a href="index.html" class="nav-link">Home</a></li>
                     <li><a href="about.html" class="nav-link">About Us</a></li>
-                    <li><a href="services.html" class="nav-link">Services</a></li>
-                    <li><a href="corporate.html" class="nav-link">Corporate</a></li>
-                    <li><a href="scholarships.html" class="nav-link">Scholarships</a></li>
-                    <li><a href="news.html" class="nav-link">News</a></li>
-                    <li><a href="events.html" class="nav-link">Events</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fa-solid fa-chevron-down" style="font-size:0.7em; margin-left:4px;"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="services.html">Core Services</a>
+                            <a href="corporate.html">Corporate Solutions</a>
+                            <a href="scholarships.html">Scholarships & Grants</a>
+                        </div>
+                    </li>
+                    <li class="nav-item-dropdown">
+                        <a href="news.html" class="nav-link">Media <i class="fa-solid fa-chevron-down" style="font-size:0.7em; margin-left:4px;"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="news.html">News & Updates</a>
+                            <a href="events.html">Gallery & Events</a>
+                        </div>
+                    </li>
                     <li><a href="faq.html" class="nav-link">FAQs</a></li>
-                    <li><a href="partner.html" class="nav-link">Partner</a></li>
                     <li><a href="contact.html" class="nav-link nav-cta">Contact Us</a></li>
                 </ul>
                 <button class="theme-toggle" id="theme-toggle" title="Toggle Dark/Light Mode">
